@@ -70,4 +70,6 @@ public class Historia_de_usuarioDAO {
         }
         return resultado;
     }
+    
+    
 }

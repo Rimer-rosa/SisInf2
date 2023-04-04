@@ -7,6 +7,7 @@ package datos;
 import dominio.Estado;
 import java.sql.*;
 import java.util.*;
+import javax.swing.JComboBox;
 /**
  *
  * @author Windows
@@ -14,7 +15,7 @@ import java.util.*;
 public class EstadoDAO {
     public static final String SQL_SELECT = "SELECT * FROM estado";
     
-    public List<Estado> mostrar(){
+    public void mostrar(JComboBox combo){
         Connection conexion = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
@@ -44,6 +45,13 @@ public class EstadoDAO {
             e.printStackTrace(System.out);
             }
         }
-        return estados;
+        cargarEstados(estados, combo);
     }
+    
+    private void cargarEstados(List<Estado> estados, JComboBox combo){
+        for (int i = 0; i < estados.size(); i++) {
+            combo.addItem(estados.get(i).getNomEstado());
+        }
+    }
+    
 }

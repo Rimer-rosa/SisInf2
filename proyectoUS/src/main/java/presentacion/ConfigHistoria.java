@@ -7,6 +7,7 @@ package presentacion;
 import datos.Historia_de_usuarioDAO;
 import dominio.Estado;
 import dominio.Historia_de_usuario;
+import datos.EstadoDAO;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ConfigHistoria extends javax.swing.JFrame {
      */
     public ConfigHistoria() {
         initComponents();
+        EstadoDAO estadoDao = new EstadoDAO();
+        estadoDao.mostrar(comboxEstado);
     }
 
     /**
