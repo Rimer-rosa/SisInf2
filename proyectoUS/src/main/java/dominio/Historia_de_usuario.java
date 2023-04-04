@@ -26,6 +26,9 @@ public class Historia_de_usuario {
         this.importancia = importancia;
         this.dificultad = dificultad;
     }
+    public Historia_de_usuario(){
+        
+    }
     
     public int getIdhistoria() {
         return idhistoria;
