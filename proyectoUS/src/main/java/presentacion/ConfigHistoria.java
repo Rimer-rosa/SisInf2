@@ -9,6 +9,7 @@ import dominio.Estado;
 import dominio.Historia_de_usuario;
 import datos.EstadoDAO;
 
+
 /**
  *
  * @author Windows
@@ -18,9 +19,10 @@ public class ConfigHistoria extends javax.swing.JFrame {
     /**
      * Creates new form ConfigHistoria
      */
+    
     public ConfigHistoria() {
         initComponents();
-        EstadoDAO estadoDao = new EstadoDAO();
+        comboxEstado.removeAllItems();
         estadoDao.mostrar(comboxEstado);
     }
 
@@ -37,7 +39,7 @@ public class ConfigHistoria extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         textFnombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         comboxEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,10 +56,10 @@ public class ConfigHistoria extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Guardar configuracion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar configuracion");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -83,7 +85,7 @@ public class ConfigHistoria extends javax.swing.JFrame {
                             .addComponent(comboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jButton1)))
+                        .addComponent(btnGuardar)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,7 +102,7 @@ public class ConfigHistoria extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(comboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnGuardar)
                 .addGap(32, 32, 32))
         );
 
@@ -112,24 +114,29 @@ public class ConfigHistoria extends javax.swing.JFrame {
        
     }//GEN-LAST:event_textFnombreActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         String nombre;
-        Estado estado;
+        String nomEstado;
+        int idEstado;
         Historia_de_usuarioDAO historiaDao;
         Historia_de_usuario historia;
         
         historiaDao = new Historia_de_usuarioDAO();
         historia = new Historia_de_usuario();
         nombre = textFnombre.getText();
-        estado = comboxEstado.get
+        nomEstado = comboxEstado.getSelectedItem().toString();
+        idEstado = estadoDao.buscarEstado(nomEstado,estadoDao.lista);
+        
         if(historiaDao.empty(nombre) == 0){
             System.out.println("nombre vacio");
             
         }else{
+            historia.setNombre(nombre);
+            historia.setEstado_idestado(idEstado);
             System.out.println("configuraciones guardadas");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,10 +172,12 @@ public class ConfigHistoria extends javax.swing.JFrame {
             }
         });
     }
+    
+    private EstadoDAO estadoDao = new EstadoDAO();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboxEstado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
