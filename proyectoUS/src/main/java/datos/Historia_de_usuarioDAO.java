@@ -52,7 +52,31 @@ public class Historia_de_usuarioDAO {
         return registros;
     }
     
-    
+    public int eliminar(int idHistoria) {
+    Connection conexion = null;
+    PreparedStatement sentencia = null;
+    int registros = 0;
+
+    try {
+        conexion = ConexionBD.getConexion();
+        sentencia = conexion.prepareStatement(SQL_delete);
+        sentencia.setInt(1, idHistoria);
+        registros = sentencia.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Historia de usuario eliminada");
+    } catch (SQLException e) {
+        e.printStackTrace(System.out);
+    } finally {
+        try {
+            ConexionBD.cerrar(sentencia);
+            ConexionBD.cerrar(conexion);
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    System.out.println("registros: " + registros);
+    return registros;
+}
+
     
     
     

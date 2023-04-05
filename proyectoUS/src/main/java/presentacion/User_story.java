@@ -147,10 +147,8 @@ public class User_story extends javax.swing.JFrame {
         int importancia;
         int dificultad;
         
-        estado = 
-        
-        
-        historia = new Historia_de_usuario();
+        //estado =i; 
+                historia = new Historia_de_usuario();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
