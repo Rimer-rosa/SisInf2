@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
  */
 public class EstadoDAO {
     public static final String SQL_SELECT = "SELECT * FROM estado";
+    public List<Estado> lista;
     
     public void mostrar(JComboBox combo){
         Connection conexion = null;
@@ -45,6 +46,7 @@ public class EstadoDAO {
             e.printStackTrace(System.out);
             }
         }
+        lista = estados;
         cargarEstados(estados, combo);
     }
     
@@ -54,4 +56,20 @@ public class EstadoDAO {
         }
     }
     
+     public int buscarEstado(String nEstado, List<Estado> estados){
+        int estadoID = -1; 
+         
+        for(int i=0; i<estados.size();i++){
+            Estado tmp =estados.get(i);
+            if(tmp.getNomEstado().equals(nEstado)){
+                estadoID = tmp.getIdEstado();
+            }
+        }
+            
+        return estadoID;
+    }
+    
+     public List<Estado> getListaEstados(){
+         return lista;
+     }
 }

@@ -82,11 +82,11 @@ public class Historia_de_usuarioDAO {
     
     
     
-    public int empty(String nombre){
+    public int empty(String texto){
         int resultado;
         boolean vacio;
         
-        vacio = nombre.equals("");
+        vacio = texto.equals("");
         if(vacio){
             resultado = 0;
         }else{
