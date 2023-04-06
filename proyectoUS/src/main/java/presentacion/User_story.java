@@ -16,10 +16,16 @@ public class User_story extends javax.swing.JFrame {
     /**
      * Creates new form User_story
      */
-    private Historia_de_usuarioDAO historiaDAO;
-    private Historia_de_usuario historia;
+    
     public User_story() {
         initComponents();
+    }
+    public User_story(Historia_de_usuario historia, Historia_de_usuarioDAO historiaDao){
+        initComponents();
+        this.historia = historia;
+        this.historiaDAO = historiaDao;
+        labelNombre.setText(historia.getNombre());
+        
     }
 
     /**
@@ -31,7 +37,7 @@ public class User_story extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,11 +48,11 @@ public class User_story extends javax.swing.JFrame {
         txtFimportancia = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nombre de la historia");
+        labelNombre.setText("Nombre de la historia");
 
         jLabel2.setText("Descripcion");
 
@@ -70,10 +76,10 @@ public class User_story extends javax.swing.JFrame {
 
         jLabel5.setText("Importancia");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -85,7 +91,7 @@ public class User_story extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
-                        .addComponent(jLabel1))
+                        .addComponent(labelNombre))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,30 +100,31 @@ public class User_story extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtFimportancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(36, 36, 36)
-                        .addComponent(txtFdificultad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                            .addComponent(jScrollPane2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
                 .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(txtFimportancia)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(36, 36, 36)
+                .addComponent(txtFdificultad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labelNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnGuardar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -138,21 +145,31 @@ public class User_story extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFimportanciaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        int estado;
-        String nombre;
         String descripcion;
         String condiciones;
-        int importancia;
-        int dificultad;
+        Integer importancia;
+        Integer dificultad;
         
-        estado = 
+        descripcion = txtADescripcion.getText();
+        condiciones = txtACondiciones.getText();
+        if(historiaDAO.empty(txtFimportancia.getText())==0){
+            importancia = null;
+        }else{
+            importancia = Integer.parseInt(txtFimportancia.getText());
+        }
+        if(historiaDAO.empty(txtFdificultad.getText())==0){
+            dificultad = null;
+        }else{
+            dificultad = Integer.parseInt(txtFdificultad.getText());
+        }
         
         
-        historia = new Historia_de_usuario();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        System.out.println("nombre: "+historia.getNombre()+" estado: "+historia.getEstado_idestado()+"descripcion: "+descripcion+" condiciones: "+condiciones+"importancia: "+importancia+" dificultad: "+dificultad);
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,16 +205,18 @@ public class User_story extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private Historia_de_usuarioDAO historiaDAO;
+    private Historia_de_usuario historia;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelNombre;
     private javax.swing.JTextArea txtACondiciones;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtFdificultad;

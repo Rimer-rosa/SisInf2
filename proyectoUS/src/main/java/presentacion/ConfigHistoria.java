@@ -135,6 +135,9 @@ public class ConfigHistoria extends javax.swing.JFrame {
             historia.setNombre(nombre);
             historia.setEstado_idestado(idEstado);
             System.out.println("configuraciones guardadas");
+            User_story pantalla = new User_story(historia, historiaDao);
+            pantalla.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
