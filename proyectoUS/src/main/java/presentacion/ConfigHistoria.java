@@ -127,7 +127,6 @@ public class ConfigHistoria extends javax.swing.JFrame {
         nombre = textFnombre.getText();
         nomEstado = comboxEstado.getSelectedItem().toString();
         idEstado = estadoDao.buscarEstado(nomEstado,estadoDao.lista);
-        
         if(historiaDao.empty(nombre) == 0){
             System.out.println("nombre vacio");
             

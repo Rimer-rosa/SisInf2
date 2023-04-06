@@ -164,10 +164,9 @@ public class User_story extends javax.swing.JFrame {
         }else{
             dificultad = Integer.parseInt(txtFdificultad.getText());
         }
-        
-        
-        
+         
         System.out.println("nombre: "+historia.getNombre()+" estado: "+historia.getEstado_idestado()+"descripcion: "+descripcion+" condiciones: "+condiciones+"importancia: "+importancia+" dificultad: "+dificultad);
+
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
