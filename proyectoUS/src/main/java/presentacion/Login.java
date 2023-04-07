@@ -99,7 +99,7 @@ public class Login extends javax.swing.JFrame {
         boolean bb = false;
         String usuario = txtUsuario.getText();
         String contra = txtContra.getText();
-        String sql =  "select * from usuario where correo_Electronico ='"+usuario+"and contrasenia ='"+contra+"";
+        String sql = "select * from usuario where correo_Electronico ='"+usuario+"'and contrasenia ='"+contra+"'";
         try {
             Connection con = ConexionBD.getConexion();
             Statement st =  con.createStatement();
