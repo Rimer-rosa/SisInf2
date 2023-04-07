@@ -29,6 +29,15 @@ public class Historia_de_usuario {
     public Historia_de_usuario(){
         
     }
+    public Historia_de_usuario(int id, int estado, String nombre, String descripcion, String condiciones, int importancia, int dificultad) {//esto en caso crear un equipo
+        this.idhistoria = id;
+        this.estado_idestado = estado;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.condiciones = condiciones;
+        this.importancia = importancia;
+        this.dificultad = dificultad;
+    }
     
     public int getIdhistoria() {
         return idhistoria;
